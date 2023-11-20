@@ -8,7 +8,7 @@ workflows:
       groups:
         - google_play
       vars:
-        PACKAGE_NAME: "com.testing.app"
+        PACKAGE_NAME: "com.sismedika.testing"
         GOOGLE_PLAY_TRACK: beta
       flutter: 3.16.0
     scripts:

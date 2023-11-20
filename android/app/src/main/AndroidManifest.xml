@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.testing.app">
+    package="com.sismedika.testing">
    <application
         android:label="counter_app"
         android:name="${applicationName}"

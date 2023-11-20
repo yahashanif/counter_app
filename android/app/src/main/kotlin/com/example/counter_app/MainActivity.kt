@@ -1,4 +1,4 @@
-package com.testing.app
+package com.sismedika.testing
 
 import io.flutter.embedding.android.FlutterActivity
 
