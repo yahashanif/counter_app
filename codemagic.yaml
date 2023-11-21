@@ -13,21 +13,26 @@ workflows:
       flutter: 3.16.0
     scripts:
       - name: Set up local.properties
-        script: | 
+        script: |
           echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
-        script: | 
+        script: |
           flutter packages pub get
+      - name: Increment version code
+        script: |
+          apktool d apk/release.apk -f
+          sed -i 's/versionCode:[0-9]+/versionCode: $NEXT_VERSION_CODE/' build.gradle
+          apktool b apk/release.apk build
       - name: Flutter analyze
-        script: | 
+        script: |
           flutter analyze
       - name: Flutter unit tests
-        script: | 
+        script: |
           flutter test
         ignore_failure: true
       - name: Build AAB with Flutter
-        script: | 
-          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks="$GOOGLE_PLAY_TRACK") + 1))      
+        script: |
+          BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks="$GOOGLE_PLAY_TRACK") + 1))
           flutter build appbundle --release \
             --build-name=1.0.$BUILD_NUMBER \
             --build-number=$BUILD_NUMBER
